@@ -1,3 +1,6 @@
+// COPIED: Razetime's APLGolf
+// SEE: https://github.com/razetime/APLgolf/blob/main/main.js
+
 // Following five functions are courtesy of dzaima
 function deflate(arr) {
     return pako.deflateRaw(arr, {
