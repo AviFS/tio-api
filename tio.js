@@ -1,7 +1,3 @@
-// COPIED: Razetime's APLGolf
-// SEE: https://github.com/razetime/APLgolf/blob/main/main.js
-
-// Following five functions are courtesy of dzaima
 function deflate(arr) {
     return pako.deflateRaw(arr, {
         "level": 9
@@ -27,7 +23,6 @@ function b64ToArr(str) {
     return new Uint8Array([...atob(decodeURIComponent(str).replace(/@/g, "+"))].map(c => c.charCodeAt()))
 }
 
-// more help from dzaima here
 async function TIO(code, input, lang) {
     const encoder = new TextEncoder("utf-8");
     let length = encoder.encode(code).length;
