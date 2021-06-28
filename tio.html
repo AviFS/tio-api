@@ -8,6 +8,7 @@
 integrity="sha512-yJSo0YTQvvGOqL2au5eH0W4K/0FI0sTJuyHjiHkh0O31Lzlb814P0fDXtuEtzOj13lOBZ9j99BjqFx4ASz9pGA=="
 crossorigin="anonymous"></script>
 <!-- And this is the library-->
+<script src="./util.js"></script>
 <script src="./tio.js"></script>
 <!-- /IMPORTANT -->
 
@@ -18,12 +19,13 @@ crossorigin="anonymous"></script>
 <input type="text" id="input" placeholder='Ifmmp!xpsme"'><br>
 <textarea id="code" rows="20" cols="50" placeholder=",[-.,]"></textarea>
 
-<button type="button" id="run" onclick=
-"document.getElementById('output').innerText = TIO(
-    document.getElementById('code').value,
-    document.getElementById('input').value,
-    document.getElementById('language').value
-    )">Run</button>
+<button type="button" id="run" onclick="
+    TIO(
+        document.getElementById('code').value,
+        document.getElementById('input').value,
+        document.getElementById('language').value
+    ).then(x => document.getElementById('output').innerText = x)
+">Run</button>
 
 <div id="output" style="font-family: monospace;"></div>
 

@@ -1,29 +1,4 @@
-function deflate(arr) {
-    return pako.deflateRaw(arr, {
-        "level": 9
-    });
-}
-
-function inflate(arr) {
-    return pako.inflateRaw(arr);
-}
-
-function encode(str) {
-    let bytes = new TextEncoder("utf-8").encode(str);
-    return deflate(bytes);
-}
-
-function arrToB64(arr) {
-    var bytestr = "";
-    arr.forEach(c => bytestr += String.fromCharCode(c));
-    return btoa(bytestr).replace(/\+/g, "@").replace(/=+/, "");
-}
-
-function b64ToArr(str) {
-    return new Uint8Array([...atob(decodeURIComponent(str).replace(/@/g, "+"))].map(c => c.charCodeAt()))
-}
-
-async function TIO(code, input, lang) {
+async function TIOrun(code, input, lang) {
     const encoder = new TextEncoder("utf-8");
     let length = encoder.encode(code).length;
     let iLength = encoder.encode(input).length;
@@ -40,7 +15,26 @@ async function TIO(code, input, lang) {
     let read = (await fetched.body.getReader().read()).value;
     let text = new TextDecoder('utf-8').decode(read);
     return text.slice(16).split(text.slice(0, 16));
-}
+} 
 
-// Test
-console.log(TIO(",[-.,]", "Ifmmp!xpsme\"", "brainfuck"));
+function TIOlinkMake(languageId, header = "", code = "", footer = "", input = "", args = [], options = [], fullLink = true) {
+    var fieldSeparator = "\xff";
+    var startOfExtraFields = "\xfe";
+
+    var stateString = languageId;
+
+    var saveTextArea = function(textArea) {
+        stateString += fieldSeparator + textToByteString(textArea);
+    };
+
+    [header, code, footer, input, ...args].forEach(saveTextArea);
+    
+    if (options.length) {
+        stateString += startOfExtraFields + "options";
+        
+        options.forEach(saveTextArea);
+    }
+    // TODO: This default arg isn't working for some reason
+    return (fullLink? "https://tio.run/##": "") +
+        byteStringToBase64(byteArrayToByteString(deflate(stateString)));
+}
