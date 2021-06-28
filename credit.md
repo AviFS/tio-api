@@ -16,9 +16,9 @@ Written by: [RedwolfPrograms](https://github.com/RedwolfPrograms)<br>
 License: (TBD)<br>
 
 ```js
-function byteStringToByteArray(byteString) 
-function textToByteString(string)
-function byteArrayToByteString(byteArray)
-function byteStringToBase64(byteString) 
-function tiopl(languageId, header = "", code = "", footer = "", input = "", args = [], options = [])
+byteStringToByteArray(byteString) 
+textToByteString(string)
+byteArrayToByteString(byteArray)
+byteStringToBase64(byteString) 
+tiopl(languageId, header = "", code = "", footer = "", input = "", args = [], options = [])
 ```
