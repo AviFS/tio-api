@@ -36,5 +36,5 @@ function TIOlinkMake(languageId, header = "", code = "", footer = "", input = ""
     }
     // TODO: This default arg isn't working for some reason
     return (fullLink? "https://tio.run/##": "") +
-        byteStringToBase64(byteArrayToByteString(deflate(stateString)));
+        byteStringToBase64(byteArrayToByteString(deflate(byteStringToByteArray(stateString))));
 }
