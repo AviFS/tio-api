@@ -39,3 +39,32 @@ function TIOlinkMake(languageId, header = "", code = "", footer = "", input = ""
         //byteStringToBase64(byteArrayToByteString(deflate(byteStringToByteArray(stateString))));
         arrToB64(deflate(byteStringToByteArray(stateString)));
 }
+
+
+function TIOparseLink(link) {
+    if  (link.slice(0,18) === "https://tio.run/##") {
+        link = link.slice(18);
+    }
+
+    var stateString = byteArrayToByteString(inflate(b64ToArr(link)));
+
+    var fields = stateString.split("þ");
+    var fields = fields.map(n=>n.split("ÿ"));
+
+    var [languageId, header, code, footer, input, ...args] = fields[0];
+    var options = [];
+
+    if (fields.length > 1) {
+        options = fields[1].slice(1);
+    }
+
+    return {
+        "languageId": languageId,
+        "header": header,
+        "code": code,
+        "footer": footer,
+        "input": input,
+        "args": args,
+        "options": options
+    }
+}
