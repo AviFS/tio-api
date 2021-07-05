@@ -1,3 +1,6 @@
+var fieldSeparator = "\xff";
+var startOfExtraFields = "\xfe";
+
 async function TIOrun(code, input, lang) {
     const encoder = new TextEncoder("utf-8");
     let length = encoder.encode(code).length;
@@ -17,9 +20,7 @@ async function TIOrun(code, input, lang) {
     return text.slice(16).split(text.slice(0, 16));
 } 
 
-function TIOlinkMake(languageId, header = "", code = "", footer = "", input = "", args = [], options = [], fullLink = true) {
-    var fieldSeparator = "\xff";
-    var startOfExtraFields = "\xfe";
+function TIOmakeLink(languageId, header = "", code = "", footer = "", input = "", args = [], options = [], fullLink = true) {
 
     var stateString = languageId;
 
@@ -48,8 +49,8 @@ function TIOparseLink(link) {
 
     var stateString = byteArrayToByteString(inflate(b64ToArr(link)));
 
-    var fields = stateString.split("þ");
-    var fields = fields.map(n=>n.split("ÿ"));
+    var fields = stateString.split(startOfExtraFields);
+    var fields = fields.map(n=>n.split(fieldSeparator));
 
     var [languageId, header, code, footer, input, ...args] = fields[0];
     var options = [];
