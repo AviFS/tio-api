@@ -9,7 +9,7 @@ function inflate(arr) {
 }
 
 function encode(str) {
-    let bytes = new TextEncoder("utf-8").encode(str);
+    var bytes = new TextEncoder("utf-8").encode(str);
     return deflate(bytes);
 }
 
