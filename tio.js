@@ -35,10 +35,10 @@ var TIO = {
         };
 
         [header, code, footer, input, ...args].forEach(saveTextArea);
-        
+
         if (options.length) {
             stateString += startOfExtraFields + "options";
-            
+
             options.forEach(saveTextArea);
         }
         // TODO: This default arg isn't working for some reason
@@ -60,6 +60,7 @@ var TIO = {
         var fields = fields.map(n=>n.split(fieldSeparator));
 
         var [languageId, header, code, footer, input, ...args] = fields[0];
+        [header, code, footer, input, ...args] = [header, code, footer, input, ...args].map(n=>byteStringToText(n));
         var options = [];
 
         if (fields.length > 1) {
@@ -77,5 +78,5 @@ var TIO = {
         }
     },
 
-    
+
 };

@@ -35,6 +35,10 @@ function textToByteString(string) {
     return window.unescape(window.encodeURIComponent(string));
 }
 
+function byteStringToText(string){
+    return window.decodeURIComponent(window.escape(string));
+}
+
 function byteArrayToByteString(byteArray) {
     var retval = "";
     byteArray.forEach(function(byte) {
