@@ -61,3 +61,11 @@ function byteArrayToByteString(byteArray) {
 function byteStringToBase64(byteString) {
     return window.btoa(byteString).replace(/\+/g, "@").replace(/=+/, "");
 }
+
+function compress(string) {
+    return arrToB64(deflate(byteStringToByteArray(string)));
+}
+
+function decompress(string) {
+    return byteArrayToByteString(inflate(b64ToArr(string)));
+}

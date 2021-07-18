@@ -44,7 +44,7 @@ let TIO = {
         // TODO: This default arg isn't working for some reason
         return (fullLink? "https://tio.run/##": "") +
             //byteStringToBase64(byteArrayToByteString(deflate(byteStringToByteArray(stateString))));
-            arrToB64(deflate(byteStringToByteArray(stateString)));
+            compress(stateString);
     },
 
 
@@ -54,7 +54,7 @@ let TIO = {
             link = link.slice(18);
         }
 
-        var stateString = byteArrayToByteString(inflate(b64ToArr(link)));
+        var stateString = decompress(link);
 
         var fields = stateString.split(startOfExtraFields);
         var fields = fields.map(n=>n.split(fieldSeparator));
